@@ -29,7 +29,9 @@ export function fetchUsersFail(json) {
 }
 
 export function fetch() {
+  console.log('oi');
   return dispatch => {
+    console.log('oi2', dispatch);
     dispatch(fetchUsers());
     return axios.get('http://localhost:4000/users')
       .then(response => dispatch(fetchUsersSuccess(response.data)))

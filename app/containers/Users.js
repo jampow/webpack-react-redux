@@ -1,19 +1,28 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetch } from '../actions';
+import { fetchUsers } from '../actions';
 import User from '../components/Users';
 import { users } from '../styles/users.scss';
 
-const Users = ({ list }) => (
-  <div className={users}>
-    {list.items.map(user => <User key={user.id} name={user.name} />)}
-  </div>
-);
+class Users extends React.Component {
+  static propTypes = {
+    list: PropTypes.object,
+    dispatch: PropTypes.func.isRequired
+  };
 
-Users.propTypes = {
-  list: PropTypes.object
-};
+  componentWillMount() {
+    this.props.dispatch(fetchUsers());
+  }
+
+  render() {
+    return (
+      <div className={users}>
+        {this.props.list.items.map(user => <User key={user.id} name={user.name} />)}
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
