@@ -11,9 +11,45 @@ const filter = (state = '', action) => {
   }
 };
 
+const users = (
+  state = {
+    isFetching: false,
+    didInvalidate: false,
+    items: []
+  },
+  action) => {
+  switch (action.type) {
+    case types.FETCH_USERS:
+      return {
+        ...state,
+        isFetching: true,
+        didInvalidate: false
+      };
+
+    case types.FETCH_USERS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        didInvalidate: false,
+        items: action.users
+      };
+
+    case types.FETCH_USERS_FAIL:
+      return {
+        ...state,
+        isFetching: false,
+        didInvalidate: true
+      };
+
+    default:
+      return state;
+  }
+};
+
 
 const rootReducer = combineReducers({
   filter,
+  users,
   routing
 });
 
