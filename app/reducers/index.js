@@ -15,7 +15,7 @@ const users = (
   state = {
     isFetching: false,
     didInvalidate: false,
-    items: []
+    items: [{username: 'Gianpaulo', name: 'Gian', id: 1}]
   },
   action) => {
   switch (action.type) {

@@ -10,7 +10,7 @@ export function filterTable(filter) {
 
 export function fetchUsers() {
   return {
-    type: types.FETCH_USERS
+    type: types.FETCH_USERS_REQUEST
   };
 }
 
@@ -28,10 +28,8 @@ export function fetchUsersFail(json) {
   };
 }
 
-export function fetch() {
-  console.log('oi');
+export function requestUsers() {
   return dispatch => {
-    console.log('oi2', dispatch);
     dispatch(fetchUsers());
     return axios.get('http://localhost:4000/users')
       .then(response => dispatch(fetchUsersSuccess(response.data)))

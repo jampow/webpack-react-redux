@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchUsers } from '../actions';
+import { requestUsers } from '../actions';
 import User from '../components/Users';
+import UserForm from '../components/UserForm';
 import { users } from '../styles/users.scss';
 
 class Users extends React.Component {
@@ -12,13 +13,14 @@ class Users extends React.Component {
   };
 
   componentWillMount() {
-    this.props.dispatch(fetchUsers());
+    this.props.dispatch(requestUsers());
   }
 
   render() {
     return (
       <div className={users}>
-        {this.props.list.items.map(user => <User key={user.id} name={user.name} />)}
+        <UserForm />
+        {this.props.list.items.map(user => <User key={user.id} name={user.username} />)}
       </div>
     );
   }

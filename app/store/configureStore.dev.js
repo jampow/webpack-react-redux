@@ -14,10 +14,8 @@ export function configureStore(initialState) {
     initialState,
     compose(
       applyMiddleware(router),
+      applyMiddleware(thunkMiddleware),
       DevTools.instrument()
     ),
-    applyMiddleware(
-      thunkMiddleware
-    )
   );
 }
