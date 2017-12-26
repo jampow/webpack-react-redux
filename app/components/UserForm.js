@@ -10,6 +10,7 @@ class UserForm extends Component {
 
   render() {
     const { onSubmit, id, username } = this.props;
+    console.log('renderForm -> ', this.props);
 
     return (
       <form onSubmit={onSubmit}>

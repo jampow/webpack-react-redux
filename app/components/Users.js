@@ -9,7 +9,8 @@ class Users extends React.Component {
     list: PropTypes.object,
     form: PropTypes.object,
     componentWillMount: PropTypes.func,
-    onSubmit: PropTypes.func
+    onSubmit: PropTypes.func,
+    onClick: PropTypes.func
   };
 
   componentWillMount() {
@@ -17,10 +18,16 @@ class Users extends React.Component {
   }
 
   render() {
+    const {
+      onSubmit,
+      form,
+      list,
+      onClick
+    } = this.props;
     return (
       <div className={users}>
-        <UserForm onSubmit={this.props.onSubmit} id={this.props.form.id} name={this.props.form.name} />
-        {this.props.list.items.map(user => <User key={user.id} name={user.username} />)}
+        <UserForm onSubmit={onSubmit} id={form.id} username={form.username} />
+        {list.items.map(user => <User onClick={() => onClick(user.id, user.username)} key={user.id} name={user.username} />)}
       </div>
     );
   }

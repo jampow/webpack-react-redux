@@ -1,11 +1,11 @@
 import * as types from '../types';
 const axios = require('axios');
 
-export function selectUser(id, name) {
+export function selectUser(id, username) {
   return {
     type: types.SELECT_USER,
     id,
-    name
+    username
   };
 }
 

@@ -4,8 +4,8 @@ import Users from '../components/Users';
 
 const mapDispatchToProps = dispatch => {
   return {
-    onClick: (id, name) => {
-      dispatch(selectUser(id, name));
+    onClick: (id, username) => {
+      dispatch(selectUser(id, username));
     },
     componentWillMount: () => {
       dispatch(requestUsers());
@@ -15,12 +15,12 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => {
-  console.log(state);
+  console.log('state -> ', state);
   return {
     list: state.users,
     form: {
-      id: state.id,
-      name: state.name
+      id: state.users.form.id,
+      username: state.users.form.username
     }
   };
 };

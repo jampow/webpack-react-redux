@@ -17,8 +17,8 @@ const users = (
     didInvalidate: false,
     items: [],
     form: {
-      id: '1',
-      name: 'test'
+      id: '',
+      username: ''
     }
   },
   action) => {
@@ -28,7 +28,7 @@ const users = (
         ...state,
         form: {
           id: action.id,
-          name: action.name
+          username: action.username
         }
       };
     case types.FETCH_USERS:
