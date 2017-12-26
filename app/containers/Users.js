@@ -1,37 +1,31 @@
-import PropTypes from 'prop-types';
-import React from 'react';
 import { connect } from 'react-redux';
-import { requestUsers } from '../actions';
-import User from '../components/Users';
-import UserForm from '../components/UserForm';
-import { users } from '../styles/users.scss';
+import { selectUser, requestUsers }  from '../actions/users/actions.js';
+import Users from '../components/Users';
 
-class Users extends React.Component {
-  static propTypes = {
-    list: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
-  };
-
-  componentWillMount() {
-    this.props.dispatch(requestUsers());
-  }
-
-  render() {
-    return (
-      <div className={users}>
-        <UserForm />
-        {this.props.list.items.map(user => <User key={user.id} name={user.username} />)}
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
+const mapDispatchToProps = dispatch => {
   return {
-    list: state.users
+    onClick: (id, name) => {
+      dispatch(selectUser(id, name));
+    },
+    componentWillMount: () => {
+      dispatch(requestUsers());
+    },
+    onSubmit: () => {}
+  };
+};
+
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    list: state.users,
+    form: {
+      id: state.id,
+      name: state.name
+    }
   };
 };
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Users);

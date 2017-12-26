@@ -15,10 +15,22 @@ const users = (
   state = {
     isFetching: false,
     didInvalidate: false,
-    items: [{username: 'Gianpaulo', name: 'Gian', id: 1}]
+    items: [],
+    form: {
+      id: '1',
+      name: 'test'
+    }
   },
   action) => {
   switch (action.type) {
+    case types.SELECT_USER:
+      return {
+        ...state,
+        form: {
+          id: action.id,
+          name: action.name
+        }
+      };
     case types.FETCH_USERS:
       return {
         ...state,

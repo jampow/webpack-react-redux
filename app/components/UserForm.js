@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 class UserForm extends Component {
   static propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    id: PropTypes.int,
+    onSubmit: PropTypes.func,
+    id: PropTypes.number,
     username: PropTypes.string
   };
 
