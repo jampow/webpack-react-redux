@@ -9,19 +9,13 @@ class UserForm extends Component {
     username: PropTypes.string
   };
 
-  onInputChange(field, e) {
-    console.log(field, e);
-    const username = {[field]: e.target.value};
-    this.setState(username);
-  }
-
   render() {
-    const { id, username, onSubmit } = this.props;
+    const { id, username, onSubmit, onInputChange } = this.props;
 
     return (
-      <form onSubmit={e => onSubmit(e, id, username)}>
-        <input type="text" ref="id" value={id} onChange={this.onInputChange.bind(this, 'id')} />
-        <input type="text" ref="username" value={username} onChange={this.onInputChange.bind(this, 'username')} />
+      <form onSubmit={onSubmit}>
+        <input type="text" name="id" value={id} onChange={onInputChange} />
+        <input type="text" name="username" value={username} onChange={onInputChange} />
         <button type="submit">Salvar</button>
       </form>
     );

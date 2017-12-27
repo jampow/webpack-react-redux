@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { selectUser, requestUsers }  from '../actions/users/actions.js';
+import { usersInputChange, selectUser, requestUsers, updateUser }  from '../actions/users/actions.js';
 import Users from '../components/Users';
 
 const mapDispatchToProps = dispatch => {
@@ -10,15 +10,23 @@ const mapDispatchToProps = dispatch => {
     componentWillMount: () => {
       dispatch(requestUsers());
     },
-    onSubmit: (e, id, username) => {
+    onInputChange: e => {
+      const t = e.target;
+      const field = t.getAttribute('name');
+      const value = t.value;
+      dispatch(usersInputChange(field, value));
+    },
+    onSubmit: e => {
       e.preventDefault();
-      console.log('oi', id, username);
+      const t = e.target;
+      const id = t.querySelector('[name=id]').value;
+      const username = t.querySelector('[name=username]').value;
+      dispatch(updateUser({id, username}));
     }
   };
 };
 
 const mapStateToProps = state => {
-  console.log('state -> ', state);
   return {
     list: state.users,
     form: {

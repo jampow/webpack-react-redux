@@ -22,6 +22,7 @@ const users = (
     }
   },
   action) => {
+  console.log('action: ', action);
   switch (action.type) {
     case types.SELECT_USER:
       return {
@@ -29,6 +30,13 @@ const users = (
         form: {
           id: action.id,
           username: action.username
+        }
+      };
+    case types.USERS_INPUT_CHANGE:
+      return {
+        ...state,
+        form: {
+          [action.field]: action.value
         }
       };
     case types.FETCH_USERS:

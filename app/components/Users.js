@@ -10,7 +10,8 @@ class Users extends React.Component {
     form: PropTypes.object,
     componentWillMount: PropTypes.func,
     onSubmit: PropTypes.func,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    onInputChange: PropTypes.func
   };
 
   componentWillMount() {
@@ -22,12 +23,13 @@ class Users extends React.Component {
       onSubmit,
       form,
       list,
-      onClick
+      onClick,
+      onInputChange
     } = this.props;
 
     return (
       <div className={users}>
-        <UserForm onSubmit={onSubmit} id={form.id} username={form.username} />
+        <UserForm onInputChange={onInputChange} onSubmit={onSubmit} id={form.id} username={form.username} />
         {list.items.map(user => <User onClick={() => onClick(user.id, user.username)} key={user.id} name={user.username} />)}
       </div>
     );

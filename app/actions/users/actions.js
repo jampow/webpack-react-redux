@@ -54,6 +54,14 @@ export function updateUserFail(json) {
   };
 }
 
+// INPUTS
+export function usersInputChange(field, value) {
+  return {
+    type: types.USERS_INPUT_CHANGE,
+    field, value
+  };
+}
+
 export function requestUsers() {
   return dispatch => {
     dispatch(fetchUsers());
@@ -65,8 +73,10 @@ export function requestUsers() {
 
 export function updateUser(user) {
   return dispatch => {
-    dispatch(requestUpdateUser(user.id, user.name));
-    return axios.put(`${endpoint}/users`)
+    dispatch(requestUpdateUser(user.username));
+    const { username } = user;
+    const payload = { username };
+    return axios.put(`${endpoint}/users/${user.id}`, payload )
       .then(response => dispatch(updateUserSuccess(response.data)))
       .catch(response => dispatch(updateUserFail(response.data)));
   };
