@@ -1,5 +1,6 @@
 import * as types from '../types';
 const axios = require('axios');
+const endpoint = 'http://localhost:9091';
 
 export function selectUser(id, username) {
   return {
@@ -9,7 +10,7 @@ export function selectUser(id, username) {
   };
 }
 
-
+// FETCH_USERS
 export function fetchUsers() {
   return {
     type: types.FETCH_USERS_REQUEST
@@ -30,12 +31,44 @@ export function fetchUsersFail(json) {
   };
 }
 
+// UPDATE_USER
+export function requestUpdateUser(id, username) {
+  return {
+    type: types.UPDATE_USER_REQUEST,
+    id,
+    username
+  };
+}
+
+export function updateUserSuccess(json) {
+  return {
+    type: types.UPDATE_USER_SUCCESS,
+    user: json
+  };
+}
+
+export function updateUserFail(json) {
+  return {
+    type: types.UPDATE_USER_FAIL,
+    error: json
+  };
+}
+
 export function requestUsers() {
   return dispatch => {
     dispatch(fetchUsers());
-    return axios.get('http://localhost:9091/users')
+    return axios.get(`${endpoint}/users`)
       .then(response => dispatch(fetchUsersSuccess(response.data)))
       .catch(response => dispatch(fetchUsersFail(response.data)));
+  };
+}
+
+export function updateUser(user) {
+  return dispatch => {
+    dispatch(requestUpdateUser(user.id, user.name));
+    return axios.put(`${endpoint}/users`)
+      .then(response => dispatch(updateUserSuccess(response.data)))
+      .catch(response => dispatch(updateUserFail(response.data)));
   };
 }
 

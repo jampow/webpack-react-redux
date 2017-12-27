@@ -24,6 +24,7 @@ class Users extends React.Component {
       list,
       onClick
     } = this.props;
+
     return (
       <div className={users}>
         <UserForm onSubmit={onSubmit} id={form.id} username={form.username} />

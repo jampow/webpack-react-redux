@@ -17,7 +17,7 @@ const users = (
     didInvalidate: false,
     items: [],
     form: {
-      id: '',
+      id: 0,
       username: ''
     }
   },

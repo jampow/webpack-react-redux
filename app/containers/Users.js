@@ -10,7 +10,10 @@ const mapDispatchToProps = dispatch => {
     componentWillMount: () => {
       dispatch(requestUsers());
     },
-    onSubmit: () => {}
+    onSubmit: (e, id, username) => {
+      e.preventDefault();
+      console.log('oi', id, username);
+    }
   };
 };
 
