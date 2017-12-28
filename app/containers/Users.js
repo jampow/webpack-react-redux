@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { usersInputChange, selectUser, getUsers, updateUser }  from '../actions/users/actions.js';
+import { usersInputChange, selectUser, getUsers, saveUser }  from '../actions/users/actions.js';
 import Users from '../components/Users';
 
 const mapDispatchToProps = dispatch => {
@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => {
       const t = e.target;
       const id = t.querySelector('[name=id]').value;
       const username = t.querySelector('[name=username]').value;
-      dispatch(updateUser({id, username}));
+      dispatch(saveUser({id, username}));
     },
     onRefreshList: e => {
       e.preventDefault();

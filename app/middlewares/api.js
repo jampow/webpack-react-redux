@@ -12,16 +12,31 @@ const defaults = {
 };
 
 const Api = store => next => action => {
-  const [, act] = action.type.split('/');
-  const { dispatch } = store;
-  const { trigger, host } = defaults;
-
   // Se não começar com o prefixo da API, sai sem fazer nada
-  if(action.type.indexOf(trigger) !== 0) {
+  if(action.type.indexOf(defaults.trigger) !== 0) {
     return next(action, axios);
   }
 
-  axios[act.toLowerCase()]([host, action.endpoint].join('/'))
+  const { payload, type } = action;
+  const [, act] = type.split('/');
+  const { dispatch } = store;
+  const { host } = defaults;
+  let method;
+  let endpoint;
+
+  switch(act) {
+    case 'SAVE':
+      if(payload && payload.id) {
+        [method, endpoint] = ['put', `${action.endpoint}/${payload.id}`];
+      } else {
+        [method, endpoint] = ['post', action.endpoint];
+      }
+      break;
+    default:
+      [method, endpoint] = ['get', action.endpoint];
+  }
+
+  axios[method]([host, endpoint].join('/'), payload)
     .then(resp => dispatch(action.success(resp)))
     .catch(resp => dispatch(
       (action.error || defaults.actions.handleError)(resp))
