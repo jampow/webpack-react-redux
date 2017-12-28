@@ -10,6 +10,21 @@ export function selectUser(id, username) {
   };
 }
 
+export function getUsers() {
+  return {
+    type: 'API/GET',
+    endpoint: 'users',
+    success: result => ({
+      type: 'FETCH_USERS_SUCCESS',
+      users: result.data
+    }),
+    error: result => ({
+      type: 'FETCH_USERS_FAIL',
+      error: result
+    })
+  };
+}
+
 // FETCH_USERS
 export function fetchUsers() {
   return {

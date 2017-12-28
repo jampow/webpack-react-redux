@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { usersInputChange, selectUser, requestUsers, updateUser }  from '../actions/users/actions.js';
+import { usersInputChange, selectUser, getUsers, updateUser }  from '../actions/users/actions.js';
 import Users from '../components/Users';
 
 const mapDispatchToProps = dispatch => {
@@ -8,7 +8,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(selectUser(id, username));
     },
     componentWillMount: () => {
-      dispatch(requestUsers());
+      dispatch(getUsers());
     },
     onInputChange: e => {
       const t = e.target;
@@ -25,18 +25,7 @@ const mapDispatchToProps = dispatch => {
     },
     onRefreshList: e => {
       e.preventDefault();
-      dispatch({
-        type: 'API/GET',
-        endpoint: 'users',
-        success: result => ({
-          type: 'FETCH_USERS_SUCCESS',
-          users: result.data
-        }),
-        error: result => ({
-          type: 'FETCH_USERS_FAIL',
-          error: result
-        })
-      });
+      dispatch(getUsers());
     }
   };
 };
