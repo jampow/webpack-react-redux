@@ -5,7 +5,10 @@ class UserForm extends Component {
   static propTypes = {
     onSubmit: PropTypes.func,
     onInputChange: PropTypes.func,
-    id: PropTypes.number,
+    id: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
     username: PropTypes.string
   };
 

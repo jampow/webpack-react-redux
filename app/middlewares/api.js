@@ -25,15 +25,22 @@ const Api = store => next => action => {
   let endpoint;
 
   switch(act) {
+    case 'REMOVE':
+      method = 'delete';
+      endpoint = `${action.endpoint}/${payload.id}`;
+      break;
     case 'SAVE':
       if(payload && payload.id) {
-        [method, endpoint] = ['put', `${action.endpoint}/${payload.id}`];
+        method = 'put';
+        endpoint = `${action.endpoint}/${payload.id}`;
       } else {
-        [method, endpoint] = ['post', action.endpoint];
+        method = 'post';
+        endpoint = action.endpoint;
       }
       break;
     default:
-      [method, endpoint] = ['get', action.endpoint];
+      method = 'get';
+      endpoint = action.endpoint;
   }
 
   axios[method]([host, endpoint].join('/'), payload)

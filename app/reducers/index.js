@@ -17,12 +17,11 @@ const users = (
     didInvalidate: false,
     items: [],
     form: {
-      id: 0,
+      id: '',
       username: ''
     }
   },
   action) => {
-  console.log('action: ', action);
   switch (action.type) {
     case types.SELECT_USER:
       return {
@@ -64,6 +63,30 @@ const users = (
         didInvalidate: true
       };
 
+    case types.SAVE_USER_SUCCESS:
+      const { user } = action;
+
+      const isNew = state.items.map(u => u.id).indexOf(user.id) === -1;
+
+      const items = isNew
+        ? [...state.items, user]
+        : state.items.map(u => {
+          console.log(`u.id: ${u} | user.id: ${user.id}`);
+
+          if(u.id === user.id) {
+            return user;
+          }
+          return u;
+        });
+
+      return {
+        ...state,
+        form: {
+          id: '',
+          username: ''
+        },
+        items
+      };
     default:
       return state;
   }

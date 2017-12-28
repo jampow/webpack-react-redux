@@ -1,0 +1,13 @@
+.btn {
+  float: right;
+}
+
+li {
+  padding: 3px;
+  list-style: none;
+  background-color: #ddd;
+}
+
+li:nth-child(2n) {
+  background-color: #aaa;
+}

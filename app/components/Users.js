@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import UserForm from '../components/UserForm';
 import User from '../components/User';
-import { users } from '../styles/users.scss';
 
 class Users extends React.Component {
   static propTypes = {
@@ -30,7 +29,7 @@ class Users extends React.Component {
     } = this.props;
 
     return (
-      <div className={users}>
+      <div>
         <UserForm onInputChange={onInputChange} onSubmit={onSubmit} id={form.id} username={form.username} />
         {list.map(user => <User onClick={() => onClick(user.id, user.username)} key={user.id} username={user.username} />)}
         <button onClick={onRefreshList}>Atualizar Lista</button>
