@@ -2,22 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class User extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: props.name
-    };
-  }
-
   render() {
     return (
-      <div onClick={this.props.onClick}>{this.state.name}</div>
+      <div onClick={this.props.onClick}>{this.props.username}</div>
     );
   }
 }
 
 User.propTypes = {
-  name: PropTypes.string,
+  username: PropTypes.string,
   onClick: PropTypes.func
 };
 

@@ -33,11 +33,14 @@ const users = (
         }
       };
     case types.USERS_INPUT_CHANGE:
+      const form = {
+        ...state.form,
+        [action.field]: action.value
+      };
+
       return {
         ...state,
-        form: {
-          [action.field]: action.value
-        }
+        form
       };
     case types.FETCH_USERS:
       return {
@@ -51,7 +54,7 @@ const users = (
         ...state,
         isFetching: false,
         didInvalidate: false,
-        items: action.users
+        items: [...action.users]
       };
 
     case types.FETCH_USERS_FAIL:

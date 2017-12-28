@@ -22,18 +22,34 @@ const mapDispatchToProps = dispatch => {
       const id = t.querySelector('[name=id]').value;
       const username = t.querySelector('[name=username]').value;
       dispatch(updateUser({id, username}));
+    },
+    onRefreshList: e => {
+      e.preventDefault();
+      dispatch({
+        type: 'API/GET',
+        endpoint: 'users',
+        success: result => ({
+          type: 'FETCH_USERS_SUCCESS',
+          users: result.data
+        }),
+        error: result => ({
+          type: 'FETCH_USERS_FAIL',
+          error: result
+        })
+      });
     }
   };
 };
 
 const mapStateToProps = state => {
-  return {
-    list: state.users,
+  const ret = {
+    list: [...state.users.items],
     form: {
       id: state.users.form.id,
       username: state.users.form.username
     }
   };
+  return ret;
 };
 
 export default connect(
