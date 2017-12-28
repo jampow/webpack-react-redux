@@ -23,6 +23,7 @@ const users = (
   },
   action) => {
   switch (action.type) {
+
     case types.SELECT_USER:
       return {
         ...state,
@@ -31,6 +32,7 @@ const users = (
           username: action.username
         }
       };
+
     case types.USERS_INPUT_CHANGE:
       const form = {
         ...state.form,
@@ -41,14 +43,8 @@ const users = (
         ...state,
         form
       };
-    case types.FETCH_USERS:
-      return {
-        ...state,
-        isFetching: true,
-        didInvalidate: false
-      };
 
-    case types.FETCH_USERS_SUCCESS:
+    case types.GET_USERS_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -56,7 +52,7 @@ const users = (
         items: [...action.users]
       };
 
-    case types.FETCH_USERS_FAIL:
+    case types.GET_USERS_FAIL:
       return {
         ...state,
         isFetching: false,
@@ -87,6 +83,7 @@ const users = (
         },
         items
       };
+
     default:
       return state;
   }

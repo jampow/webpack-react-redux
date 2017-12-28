@@ -21,11 +21,11 @@ export function getUsers() {
     type: 'API/GET',
     endpoint: 'users',
     success: result => ({
-      type: 'FETCH_USERS_SUCCESS',
+      type: types.GET_USERS_SUCCESS,
       users: result.data
     }),
     error: result => ({
-      type: 'FETCH_USERS_FAIL',
+      type: types.GET_USERS_FAIL,
       error: result
     })
   };
@@ -37,11 +37,11 @@ export function saveUser(user) {
     endpoint: 'users',
     payload: user,
     success: result => ({
-      type: 'SAVE_USER_SUCCESS',
+      type: types.SAVE_USER_SUCCESS,
       user: result.data
     }),
     error: result => ({
-      type: 'SAVE_USER_FAIL',
+      type: types.SAVE_USER_FAIL,
       error: result
     })
   };
