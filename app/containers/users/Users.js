@@ -35,14 +35,13 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => {
-  const ret = {
+  return {
     list: [...state.users.items],
     form: {
       id: state.users.form.id,
       username: state.users.form.username
     }
   };
-  return ret;
 };
 
 export default connect(

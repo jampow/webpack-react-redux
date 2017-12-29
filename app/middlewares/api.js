@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const defaults = {
-  host: 'http://localhost:9091',
+  host: 'http://localhost:9090/v1',
   trigger: 'API/',
   actions: {
     handleError: error => ({
@@ -12,13 +12,13 @@ const defaults = {
 };
 
 const Api = store => next => action => {
-  // Se não começar com o prefixo da API, sai sem fazer nada
+  // Se não começar com o gatilho da API, sai do middleware
   if(action.type.indexOf(defaults.trigger) !== 0) {
     return next(action, axios);
   }
 
   const { type } = action;
-  const [, act] = type.split('/');
+  const act = type.split('/')[1];
   const { dispatch } = store;
   const { host } = defaults;
   let method;
@@ -35,9 +35,12 @@ const Api = store => next => action => {
     case 'SAVE':
       payload = action.payload;
 
+      // UPDATE
       if(payload && payload.id) {
         method = 'put';
         endpoint = `${action.endpoint}/${payload.id}`;
+
+      // CREATE
       } else {
         method = 'post';
         endpoint = action.endpoint;
@@ -49,13 +52,15 @@ const Api = store => next => action => {
       endpoint = action.endpoint;
   }
 
-  axios[method]([host, endpoint].join('/'), payload)
-    .then(resp => {
-      return dispatch(action.success(resp));
-    })
-    .catch(resp => dispatch(
-      (action.error || defaults.actions.handleError)(resp))
-    );
+  axios[method](
+    [host, endpoint].join('/'),
+    JSON.stringify(payload)
+  ).then(resp => {
+    return dispatch(action.success(resp));
+  })
+  .catch(resp => dispatch(
+    (action.error || defaults.actions.handleError)(resp))
+  );
 
   return next(action);
 };
