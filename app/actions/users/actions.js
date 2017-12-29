@@ -1,5 +1,7 @@
 import * as types from '../types';
 
+const endpoint = 'users';
+
 export function selectUser(id, username) {
   return {
     type: types.SELECT_USER,
@@ -19,7 +21,7 @@ export function usersInputChange(field, value) {
 export function getUsers() {
   return {
     type: 'API/GET',
-    endpoint: 'users',
+    endpoint,
     success: result => ({
       type: types.GET_USERS_SUCCESS,
       users: result.data
@@ -34,7 +36,7 @@ export function getUsers() {
 export function saveUser(user) {
   return {
     type: 'API/SAVE',
-    endpoint: 'users',
+    endpoint,
     payload: user,
     success: result => ({
       type: types.SAVE_USER_SUCCESS,
@@ -50,7 +52,7 @@ export function saveUser(user) {
 export function removeUser(id) {
   return {
     type: 'API/REMOVE',
-    endpoint: 'users',
+    endpoint,
     payload: { id },
     success: result => ({
       type: types.REMOVE_USER_SUCCESS,

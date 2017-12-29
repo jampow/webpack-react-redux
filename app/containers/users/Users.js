@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { usersInputChange, selectUser, getUsers, saveUser, removeUser }  from '../actions/users/actions.js';
-import Users from '../components/Users';
+import { usersInputChange, selectUser, getUsers, saveUser, removeUser }  from '../../actions/users/actions.js';
+import Users from '../../components/users/Users';
 
 const mapDispatchToProps = dispatch => {
   return {

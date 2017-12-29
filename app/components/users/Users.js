@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import UserForm from '../components/UserForm';
-import User from '../components/User';
+import UserForm from '../../components/users/UserForm';
+import User from '../../components/users/User';
 
 class Users extends React.Component {
   static propTypes = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { btn } from '../styles/user.scss';
+import { btn } from '../../styles/user.scss';
 
 class User extends React.Component {
   static propTypes() {
