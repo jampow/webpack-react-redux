@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Users from './containers/users/Users';
-import Login from './containers/login/Login';
+import Users from './containers/users';
+import Login from './containers/login';
 
 export default (
 	<Switch>

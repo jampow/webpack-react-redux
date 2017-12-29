@@ -1,4 +1,4 @@
-import Login from '../../components/login/LoginForm';
+import Login from '../../components/login';
 import { connect } from 'react-redux';
 import { login, logout } from '../../actions/login';
 
