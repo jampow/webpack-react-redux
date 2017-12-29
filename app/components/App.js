@@ -7,9 +7,7 @@ const App = () =>
     <div>
         { Routes }
         <footer className={footer}>
-            <Link to="/">Filterable Table</Link>
-            <Link to="/about">About</Link>
-            <Link to="/users">Users</Link>
+            <Link to="/">Users</Link>
         </footer>
     </div>;
 
