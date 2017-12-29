@@ -53,11 +53,12 @@ export function removeUser(id) {
     endpoint: 'users',
     payload: { id },
     success: result => ({
-      type: 'REMOVE_USER_SUCCESS',
+      type: types.REMOVE_USER_SUCCESS,
+      id,
       result
     }),
     error: result => ({
-      type: 'REMOVE_USER_FAIL',
+      type: types.REMOVE_USER_FAIL,
       error: result
     })
   };

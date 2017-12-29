@@ -11,6 +11,7 @@ class Users extends React.Component {
     onSubmit: PropTypes.func,
     onClick: PropTypes.func,
     onInputChange: PropTypes.func,
+    handleRemove: PropTypes.func,
     onRefreshList: PropTypes.func
   };
 
@@ -25,13 +26,14 @@ class Users extends React.Component {
       list,
       onClick,
       onInputChange,
+      handleRemove,
       onRefreshList
     } = this.props;
 
     return (
       <div>
         <UserForm onInputChange={onInputChange} onSubmit={onSubmit} id={form.id} username={form.username} />
-        {list.map(user => <User onClick={() => onClick(user.id, user.username)} key={user.id} username={user.username} />)}
+        {list.map(user => <User onClick={() => onClick(user.id, user.username)} handleRemove={e => handleRemove(e, user.id)} key={user.id} username={user.username} />)}
         <button onClick={onRefreshList}>Atualizar Lista</button>
       </div>
     );

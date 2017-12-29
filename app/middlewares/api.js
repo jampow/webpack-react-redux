@@ -17,19 +17,24 @@ const Api = store => next => action => {
     return next(action, axios);
   }
 
-  const { payload, type } = action;
+  const { type } = action;
   const [, act] = type.split('/');
   const { dispatch } = store;
   const { host } = defaults;
   let method;
   let endpoint;
+  let payload;
 
   switch(act) {
+
     case 'REMOVE':
       method = 'delete';
-      endpoint = `${action.endpoint}/${payload.id}`;
+      endpoint = `${action.endpoint}/${action.payload.id}`;
       break;
+
     case 'SAVE':
+      payload = action.payload;
+
       if(payload && payload.id) {
         method = 'put';
         endpoint = `${action.endpoint}/${payload.id}`;
@@ -38,23 +43,21 @@ const Api = store => next => action => {
         endpoint = action.endpoint;
       }
       break;
+
     default:
       method = 'get';
       endpoint = action.endpoint;
   }
 
   axios[method]([host, endpoint].join('/'), payload)
-    .then(resp => dispatch(action.success(resp)))
+    .then(resp => {
+      return dispatch(action.success(resp));
+    })
     .catch(resp => dispatch(
       (action.error || defaults.actions.handleError)(resp))
     );
 
-  console.group(action.type);
-  console.info('dispatching: ', action);
-  const result = next(action);
-  console.log('next state: ', store.getState());
-  console.groupEnd(action.type);
-  return result;
+  return next(action);
 };
 
 export default Api;

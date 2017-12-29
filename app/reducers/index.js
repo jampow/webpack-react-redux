@@ -15,6 +15,7 @@ const users = (
   state = {
     isFetching: false,
     didInvalidate: false,
+    error: '',
     items: [],
     form: {
       id: '',
@@ -67,8 +68,6 @@ const users = (
       const items = isNew
         ? [...state.items, user]
         : state.items.map(u => {
-          console.log(`u.id: ${u} | user.id: ${user.id}`);
-
           if(u.id === user.id) {
             return user;
           }
@@ -82,6 +81,20 @@ const users = (
           username: ''
         },
         items
+      };
+
+    case types.REMOVE_USER_SUCCESS:
+      return {
+        ...state,
+        items: state.items.filter(u => u.id !== action.id)
+      };
+
+    case types.REMOVE_USER_FAIL:
+      return {
+        ...state,
+        isFetching: false,
+        didInvalidate: true,
+        error: action.error
       };
 
     default:

@@ -7,16 +7,16 @@ class User extends React.Component {
     return {
       username: PropTypes.string,
       onClick: PropTypes.func,
-      removeUser: PropTypes.func
+      handleRemove: PropTypes.func
     };
   }
 
   render() {
-    const { onClick, username, removeUser } = this.props;
+    const { onClick, username, handleRemove } = this.props;
     return (
       <li>
         <span onClick={onClick}>{username}</span>
-        <button className={btn} onClick={removeUser}>remove</button>
+        <button className={btn} onClick={handleRemove}>remove</button>
       </li>
     );
   }
