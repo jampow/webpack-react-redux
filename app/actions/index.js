@@ -1,4 +1,4 @@
-import * as users from './users/actions';
+import * as users from './users';
 import * as login from './login';
 
 export default {
